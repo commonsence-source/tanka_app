@@ -29,7 +29,10 @@ tanka = st.text_area("短歌（1首）")
 if st.button("投稿する"):
     if tanka.strip():
         with file_path.open("a", encoding="utf-8") as f:
-            entry = f"{author.strip() if author else '名無し'}：{tanka.strip()}\n"
+            if author.strip():
+                entry = f"{author.strip() }：{tanka.strip()}\n"
+            else:
+                entry = f"{tanka.strip()}\n"
             f.write(entry)
         st.success(f"「{kakai_name}」に短歌を投稿しました！")
     else:
@@ -162,3 +165,4 @@ if file_path.exists():
 
 else:
     st.info("まだ投稿がありません。")
+
